@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - My First Web Project</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --container-bg: #ffffff;
+            --text-main: #1a73e8;
+            --text-sub: #5f6368;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --container-bg: #2d2d2d;
+            --text-main: #8ab4f8;
+            --text-sub: #bdc1c6;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-sub);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav {
+            background-color: var(--container-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-links a {
+            margin-left: 1.5rem;
+            text-decoration: none;
+            color: var(--text-sub);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--text-main);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 4rem 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .about-container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--container-bg);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px var(--shadow);
+        }
+
+        h1 {
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .about-section {
+            margin-bottom: 2rem;
+        }
+
+        .about-section h2 {
+            color: var(--text-main);
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            background-color: var(--container-bg);
+            border-top: 1px solid var(--shadow);
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-home:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">MyBrand</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <button class="theme-toggle" id="themeToggle">Theme</button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="about-container">
+            <h1>About This Project</h1>
+            
+            <section class="about-section">
+                <h2>Our Mission</h2>
+                <p>This project was created to demonstrate the core fundamentals of web development. We believe in building clean, fast, and accessible websites that provide value to users.</p>
+            </section>
+
+            <section class="about-section">
+                <h2>The Technology</h2>
+                <p>We use the latest web standards including HTML5 for structure, CSS3 for modern styling (including Flexbox and Grid), and vanilla JavaScript for interactivity.</p>
+            </section>
+
+            <section class="about-section">
+                <h2>The Developer</h2>
+                <p>This page was built as a first step into the world of web development. Every line of code represents a new skill learned and a new challenge overcome.</p>
+            </section>
+
+            <a href="index.html" class="back-home">&larr; Back to Home</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; <span id="year"></span> My First Web Project. All rights reserved.
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.setAttribute('data-theme', savedTheme);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? '' : 'dark';
+            
+            if (newTheme) {
+                body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', '');
+            }
+        });
+    </script>
+</body>
+</html>

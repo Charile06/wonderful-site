@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Webpage - Landing Page Edition</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --container-bg: #ffffff;
+            --text-main: #1a73e8;
+            --text-sub: #395c86;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --input-border: #ddd;
+            --accent: #ff9800;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #680a0a;
+            --container-bg: #2d2d2d;
+            --text-main: #8ab4f8;
+            --text-sub: #bdc1c6;
+            --shadow: rgba(0, 0, 0, 0.5);
+            --input-border: #444;
+            --accent: #ffb74d;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-sub);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--container-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-links a {
+            margin-left: 1.5rem;
+            text-decoration: none;
+            color: var(--text-sub);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--text-main);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding-bottom: 4rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero-container {
+            padding: 3rem;
+            background: var(--container-bg);
+            border-radius: 16px;
+            box-shadow: 0 8px 16px var(--shadow);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        /* Features Section */
+        .features {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .features h2 {
+            text-align: center;
+            color: var(--text-main);
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--container-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background-color: var(--container-bg);
+            padding: 4rem 2rem;
+            margin-top: 2rem;
+        }
+
+        .portfolio h2 {
+            text-align: center;
+            color: var(--text-main);
+            margin-bottom: 3rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px var(--shadow);
+            transition: transform 0.3s;
+            background: var(--bg-color);
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-tag {
+            background: var(--text-main);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .contact h2 {
+            text-align: center;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+        }
+
+        form {
+            background: var(--container-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            padding: 0.8rem;
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
+            background: var(--bg-color);
+            color: var(--text-sub);
+            font-family: inherit;
+        }
+
+        /* Buttons */
+        button {
+            background-color: var(--text-main);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 0.4rem 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            background-color: var(--container-bg);
+            border-top: 1px solid var(--shadow);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">MyBrand</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="#features">Features</a>
+            <a href="#portfolio">Projects</a>
+            <a href="#contact">Contact</a>
+            <button class="theme-toggle" id="themeToggle">Theme</button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Hero -->
+        <section id="hero" class="hero fade-in">
+            <div class="hero-container">
+                <h1 id="greeting">Welcome to My Project</h1>
+                <p>Build something amazing today. This landing page is built with pure HTML, CSS, and JS.</p>
+                <button id="actionBtn">Discover More</button>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features" class="features">
+            <h2 class="fade-in">Why Choose Us?</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🚀</span>
+                    <h3>Fast Performance</h3>
+                    <p>Optimized code for the best user experience and lightning speed.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">📱</span>
+                    <h3>Responsive Design</h3>
+                    <p>Looks great on any device, from smartphones to desktops.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🛡️</span>
+                    <h3>Secure & Clean</h3>
+                    <p>Written with best practices to ensure security and maintainability.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio -->
+        <section id="portfolio" class="portfolio">
+            <h2 class="fade-in">My Recent Projects</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-info">
+                        <span class="portfolio-tag">Web Design</span>
+                        <h3>E-commerce Redesign</h3>
+                        <p>A complete overhaul of an online store focused on conversion.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-in">
+                    <div class="portfolio-info">
+                        <span class="portfolio-tag">JavaScript</span>
+                        <h3>Interactive Dashboard</h3>
+                        <p>Real-time data visualization using modern JS techniques.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="contact fade-in">
+            <h2>Get in Touch</h2>
+            <form id="contactForm" action="https://formspree.io/f/xqeynbky" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="_replyto" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" placeholder="How can we help?" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        &copy; <span id="year"></span> My First Web Project. All rights reserved.
+    </footer>
+
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Surprise messages
+        const actionBtn = document.getElementById('actionBtn');
+        const greeting = document.getElementById('greeting');
+        const messages = [
+            "Keep Learning Every Day!",
+            "You're doing great!",
+            "JavaScript is Powerful!",
+            "Design Matters!"
+        ];
+        
+        actionBtn.addEventListener('click', () => {
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            greeting.textContent = randomMsg;
+        });
+
+        // Theme management with persistence
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            body.setAttribute('data-theme', savedTheme);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? '' : 'dark';
+            
+            if (newTheme) {
+                body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', '');
+            }
+        });
+
+        // Form submission handling - Simple mailto approach
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            // No e.preventDefault() here to allow the browser to handle mailto
+            console.log("Preparing email...");
+        });
+    </script>
+</body>
+</html>
