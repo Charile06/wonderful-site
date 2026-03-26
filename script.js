@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const todoList = document.getElementById('todo-list');
 
     const loadTodos = () => {
+        if (!todoList) return; // Add check to prevent errors on pages without todo list
         const todos = JSON.parse(localStorage.getItem('todos') || '[]');
         todoList.innerHTML = '';
         todos.forEach((todo, index) => {
@@ -85,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             li.style.borderBottom = '1px solid var(--shadow)';
             li.innerHTML = `
                 <span style="text-decoration: ${todo.completed ? 'line-through' : 'none'}; cursor: pointer;">${todo.text}</span>
-                <button style="padding: 0.2rem 0.5rem; background: #ff4444; font-size: 0.8rem;">Del</button>
+                <button style="padding: 0.2rem 0.5rem; background: #ff4444; font-size: 0.8rem; color: white; border: none; border-radius: 4px; cursor: pointer;">Del</button>
             `;
             
             // Toggle completion
@@ -110,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('todos', JSON.stringify(todos));
     };
 
-    if (addTodoBtn && todoInput) {
+    if (addTodoBtn && todoInput && todoList) {
         addTodoBtn.addEventListener('click', () => {
             const text = todoInput.value.trim();
             if (text) {
@@ -127,7 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    loadTodos();
+    if (todoList) {
+        loadTodos();
+    }
 
     // New: AI Assistant Feature
     const aiInput = document.getElementById('ai-input');
@@ -135,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const aiChatWindow = document.getElementById('ai-chat-window');
 
     const addMessage = (text, isUser = false) => {
+        if (!aiChatWindow) return;
         const msgDiv = document.createElement('div');
         msgDiv.className = isUser ? 'user-msg' : 'ai-msg';
         msgDiv.textContent = text;
@@ -153,9 +157,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return "That's interesting! I'm still learning, but you can ask me about projects, the about page, or how to use the theme toggle.";
     };
 
-    if (aiSendBtn && aiInput) {
-        aiSendBtn.addEventListener('click', () => {
+    if (aiSendBtn && aiInput && aiChatWindow) {
+        console.log("AI Assistant initialized"); // Debug log
+        aiSendBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent any default behavior
             const text = aiInput.value.trim();
+            console.log("User sent:", text); // Debug log
             if (text) {
                 addMessage(text, true);
                 aiInput.value = '';
@@ -163,13 +170,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Simulate thinking time
                 setTimeout(() => {
                     const response = getAIResponse(text);
+                    console.log("AI response:", response); // Debug log
                     addMessage(response, false);
                 }, 600);
             }
         });
 
         aiInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') aiSendBtn.click();
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                aiSendBtn.click();
+            }
         });
+    } else {
+        console.log("AI elements not found on this page");
     }
 });
