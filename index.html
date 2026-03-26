@@ -13,6 +13,7 @@
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
             <a href="services.html">Services</a>
+            <a href="#todo-section">App</a>
             <a href="#features">Features</a>
             <a href="#portfolio">Projects</a>
             <a href="#contact">Contact</a>
@@ -26,7 +27,24 @@
             <div class="hero-container">
                 <h1 id="greeting">Welcome to My Project</h1>
                 <p>Build something amazing today. This landing page is built with pure HTML, CSS, and JS.</p>
-                <button id="actionBtn">Discover More</button>
+                <div class="hero-stats" style="margin-top: 2rem; display: flex; justify-content: space-around; font-weight: bold;">
+                    <div><span id="quote-text">"Loading inspiration..."</span></div>
+                </div>
+                <button id="actionBtn" style="margin-top: 2rem;">Discover More</button>
+            </div>
+        </section>
+
+        <!-- Interactive App Section -->
+        <section id="todo-section" class="portfolio fade-in" style="background: var(--bg-color);">
+            <div class="container" style="max-width: 500px; margin: 0 auto; background: var(--container-bg); padding: 2rem; border-radius: 12px; box-shadow: 0 4px 8px var(--shadow);">
+                <h2 style="color: var(--text-main);">Personal Task Manager</h2>
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                    <input type="text" id="todo-input" placeholder="What needs to be done?" style="flex: 1; padding: 0.5rem;">
+                    <button id="add-todo-btn" style="padding: 0.5rem 1rem;">Add</button>
+                </div>
+                <ul id="todo-list" style="list-style: none; padding: 0; text-align: left;">
+                    <!-- Tasks will appear here -->
+                </ul>
             </div>
         </section>
 
