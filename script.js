@@ -128,4 +128,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     loadTodos();
+
+    // New: AI Assistant Feature
+    const aiInput = document.getElementById('ai-input');
+    const aiSendBtn = document.getElementById('ai-send-btn');
+    const aiChatWindow = document.getElementById('ai-chat-window');
+
+    const addMessage = (text, isUser = false) => {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = isUser ? 'user-msg' : 'ai-msg';
+        msgDiv.textContent = text;
+        aiChatWindow.appendChild(msgDiv);
+        aiChatWindow.scrollTop = aiChatWindow.scrollHeight;
+    };
+
+    const getAIResponse = (input) => {
+        const lowerInput = input.toLowerCase();
+        if (lowerInput.includes('hello') || lowerInput.includes('hi')) return "Hello there! How can I help you explore this website?";
+        if (lowerInput.includes('about')) return "This website is a personal project created to learn web development. Check out the About page!";
+        if (lowerInput.includes('projects') || lowerInput.includes('work')) return "You can see my latest work in the Projects section below.";
+        if (lowerInput.includes('contact')) return "You can reach out via the contact form at the bottom of the page.";
+        if (lowerInput.includes('theme') || lowerInput.includes('color')) return "You can switch between light and dark modes using the Theme button in the navigation bar!";
+        if (lowerInput.includes('who are you')) return "I'm a simulated AI assistant built with pure JavaScript!";
+        return "That's interesting! I'm still learning, but you can ask me about projects, the about page, or how to use the theme toggle.";
+    };
+
+    if (aiSendBtn && aiInput) {
+        aiSendBtn.addEventListener('click', () => {
+            const text = aiInput.value.trim();
+            if (text) {
+                addMessage(text, true);
+                aiInput.value = '';
+                
+                // Simulate thinking time
+                setTimeout(() => {
+                    const response = getAIResponse(text);
+                    addMessage(response, false);
+                }, 600);
+            }
+        });
+
+        aiInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') aiSendBtn.click();
+        });
+    }
 });

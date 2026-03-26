@@ -14,6 +14,7 @@
             <a href="about.html">About</a>
             <a href="services.html">Services</a>
             <a href="#todo-section">App</a>
+            <a href="#ai-section">AI Assistant</a>
             <a href="#features">Features</a>
             <a href="#portfolio">Projects</a>
             <a href="#contact">Contact</a>
@@ -45,6 +46,20 @@
                 <ul id="todo-list" style="list-style: none; padding: 0; text-align: left;">
                     <!-- Tasks will appear here -->
                 </ul>
+            </div>
+        </section>
+
+        <!-- AI Assistant Section -->
+        <section id="ai-section" class="portfolio fade-in">
+            <div class="container" style="max-width: 600px; margin: 0 auto; background: var(--container-bg); padding: 2rem; border-radius: 12px; box-shadow: 0 4px 8px var(--shadow);">
+                <h2 style="color: var(--text-main);">AI Assistant (Simulated)</h2>
+                <div id="ai-chat-window" style="height: 300px; overflow-y: auto; border: 1px solid var(--shadow); padding: 1rem; margin-bottom: 1rem; background: var(--bg-color); border-radius: 8px; display: flex; flex-direction: column; gap: 0.5rem;">
+                    <div class="ai-msg">Hello! I'm your website's AI assistant. Ask me anything about this site!</div>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="ai-input" placeholder="Ask me something..." style="flex: 1; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--input-border);">
+                    <button id="ai-send-btn">Send</button>
+                </div>
             </div>
         </section>
 

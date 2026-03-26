@@ -265,3 +265,28 @@ footer {
     background-color: var(--container-bg);
     border-top: 1px solid var(--shadow);
 }
+
+/* AI Chat Bubbles */
+.ai-msg, .user-msg {
+    max-width: 80%;
+    padding: 0.8rem 1.2rem;
+    border-radius: 18px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.ai-msg {
+    align-self: flex-start;
+    background: var(--container-bg);
+    color: var(--text-sub);
+    border: 1px solid var(--shadow);
+    border-bottom-left-radius: 4px;
+}
+
+.user-msg {
+    align-self: flex-end;
+    background: var(--text-main);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
