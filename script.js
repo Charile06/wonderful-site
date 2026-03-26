@@ -148,13 +148,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const getAIResponse = (input) => {
         const lowerInput = input.toLowerCase();
-        if (lowerInput.includes('hello') || lowerInput.includes('hi')) return "Hello there! How can I help you explore this website?";
-        if (lowerInput.includes('about')) return "This website is a personal project created to learn web development. Check out the About page!";
-        if (lowerInput.includes('projects') || lowerInput.includes('work')) return "You can see my latest work in the Projects section below.";
-        if (lowerInput.includes('contact')) return "You can reach out via the contact form at the bottom of the page.";
-        if (lowerInput.includes('theme') || lowerInput.includes('color')) return "You can switch between light and dark modes using the Theme button in the navigation bar!";
-        if (lowerInput.includes('who are you')) return "I'm a simulated AI assistant built with pure JavaScript!";
-        return "That's interesting! I'm still learning, but you can ask me about projects, the about page, or how to use the theme toggle.";
+        
+        // --- 核心功能关键词 (Core Features) ---
+        if (lowerInput.includes('about') || lowerInput.includes('关于')) return "This website is a personal project created to learn web development. Check out the About page!";
+        if (lowerInput.includes('projects') || lowerInput.includes('项目') || lowerInput.includes('work')) return "You can see my latest work in the Projects section below.";
+        if (lowerInput.includes('contact') || lowerInput.includes('联系')) return "You can reach out via the contact form at the bottom of the page.";
+        if (lowerInput.includes('theme') || lowerInput.includes('主题') || lowerInput.includes('color')) return "You can switch between light and dark modes using the Theme button in the navigation bar!";
+        
+        // --- 特定话题: 周海淇 (Specific Topic: Zhou Haiqi) ---
+        if (lowerInput.includes('周海淇')) {
+            if (lowerInput.includes('喜欢')) {
+                return "哇，原来你喜欢周海淇呀！这是一个很棒的秘密。也许你可以试着在网站上为她/他做一个专门的展示页面？";
+            }
+            if (lowerInput.includes('追') || lowerInput.includes('方法') || lowerInput.includes('计划')) {
+                return "制定追周海淇的方法？首先你要展现出最真实、最优秀的自己。比如，继续完善这个网站，向她展示你的才华！你可以从分享有趣的内容开始。";
+            }
+            return "周海淇是一个很特别的人吗？你可以多跟我聊聊关于她/他的事情。";
+        }
+
+        // --- 基础问候 (Greetings) ---
+        if (lowerInput.includes('hello') || lowerInput.includes('hi') || lowerInput.includes('你好')) return "Hello there! How can I help you explore this website?";
+        if (lowerInput.includes('who are you') || lowerInput.includes('你是谁')) return "I'm a simulated AI assistant built with pure JavaScript!";
+        
+        // --- 兜底回答 (Fallbacks) ---
+        const fallbacks = [
+            "这是一个很有深度的问题，让我想想...",
+            "听起来很有趣！你能再详细说说吗？",
+            "虽然我只是个模拟 AI，但我能感觉到这个问题对你很重要。",
+            "你可以试着问我关于‘项目’、‘关于我’或者‘切换主题’的内容。"
+        ];
+        return fallbacks[Math.floor(Math.random() * fallbacks.length)];
     };
 
     if (aiSendBtn && aiInput && aiChatWindow) {
